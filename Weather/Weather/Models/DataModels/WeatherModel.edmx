@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WeatherModels.DataModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cache">
+          <Key>
+            <PropertyRef Name="cacheID" />
+          </Key>
+          <Property Name="cacheID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lat" Type="float" Nullable="false" />
+          <Property Name="lng" Type="float" Nullable="false" />
+          <Property Name="result" Type="text" Nullable="false" />
+          <Property Name="nextUpdate" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <Function Name="usp_AddCache" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="lat" Type="float" Mode="In" />
+          <Parameter Name="lng" Type="float" Mode="In" />
+          <Parameter Name="result" Type="text" Mode="In" />
+        </Function>
+        <Function Name="usp_GetCache" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="lat" Type="float" Mode="In" />
+          <Parameter Name="lng" Type="float" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateCache" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="lat" Type="float" Mode="In" />
+          <Parameter Name="lng" Type="float" Mode="In" />
+          <Parameter Name="result" Type="text" Mode="In" />
+        </Function>
+        <EntityContainer Name="WeatherModelsDataModelsStoreContainer">
+          <EntitySet Name="Cache" EntityType="Self.Cache" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WeatherModels.DataModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cache">
+          <Key>
+            <PropertyRef Name="cacheID" />
+          </Key>
+          <Property Name="cacheID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lat" Type="Double" Nullable="false" />
+          <Property Name="result" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nextUpdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lng" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WeatherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cache" EntityType="Self.Cache" />
+          <FunctionImport Name="usp_AddCache">
+            <Parameter Name="lat" Mode="In" Type="Double" />
+            <Parameter Name="lng" Mode="In" Type="Double" />
+            <Parameter Name="result" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetCache" ReturnType="Collection(String)">
+            <Parameter Name="lat" Mode="In" Type="Double" />
+            <Parameter Name="lng" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateCache">
+            <Parameter Name="lat" Mode="In" Type="Double" />
+            <Parameter Name="lng" Mode="In" Type="Double" />
+            <Parameter Name="result" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WeatherModelsDataModelsStoreContainer" CdmEntityContainer="WeatherEntities">
+          <EntitySetMapping Name="Cache">
+            <EntityTypeMapping TypeName="WeatherModels.DataModels.Cache">
+              <MappingFragment StoreEntitySet="Cache">
+                <ScalarProperty Name="lng" ColumnName="lng" />
+                <ScalarProperty Name="cacheID" ColumnName="cacheID" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="nextUpdate" ColumnName="nextUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="WeatherModels.DataModels.Cache">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="WeatherModels.DataModels.Store.usp_AddCache">
+                  <ScalarProperty Name="lng" ParameterName="lng" />
+                  <ScalarProperty Name="result" ParameterName="result" />
+                  <ScalarProperty Name="lat" ParameterName="lat" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="WeatherModels.DataModels.Store.usp_UpdateCache">
+                  <ScalarProperty Name="lng" ParameterName="lng" Version="Current" />
+                  <ScalarProperty Name="result" ParameterName="result" Version="Current" />
+                  <ScalarProperty Name="lat" ParameterName="lat" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_AddCache" FunctionName="WeatherModels.DataModels.Store.usp_AddCache" />
+          <FunctionImportMapping FunctionImportName="usp_GetCache" FunctionName="WeatherModels.DataModels.Store.usp_GetCache" />
+          <FunctionImportMapping FunctionImportName="usp_UpdateCache" FunctionName="WeatherModels.DataModels.Store.usp_UpdateCache" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+﻿@model Weather.ViewModels.WeatherData
+
+@{
+    ViewBag.Title = "Weather";
+}
+
+<h2>Weather forecast for @Model.getLocation()</h2>
+
+
+@foreach (var item in Model.getList()) {
+
+    <div class="box">
+        <p class="day">
+            @Model.getDay(@item.Time)<br />
+
+        </p>
+        <img src="http://openweathermap.org/img/w/@(item.SymbolId).png">
+
+        <p class="temp">
+            @Model.getTemp(@item.Temperature) C
+        </p>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Search for a new Location", "Index")
+</div>
