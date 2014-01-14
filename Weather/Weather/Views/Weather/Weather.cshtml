@@ -4,24 +4,30 @@
     ViewBag.Title = "Weather";
 }
 
-<h2>Weather forecast for @Model.getLocation()</h2>
+<h2 class="h2">Weather forecast for @Model.getLocation()</h2>
 
+<div class="container">
+    <div class="row">
 
-@foreach (var item in Model.getList()) {
+        @foreach (var item in Model.getList()) {
 
-    <div class="box">
-        <p class="day">
-            @Model.getDay(@item.Time)<br />
+            <div class="span2">
+                <div class="box">
+                    <p class="day">
+                        @Model.getDay(@item.Time)<br />
+                    </p>
 
-        </p>
-        <img src="http://openweathermap.org/img/w/@(item.SymbolId).png">
+                    <img src="http://openweathermap.org/img/w/@(item.SymbolId).png" alt="@(item.Desc)" title="@(item.Desc)">
 
-        <p class="temp">
-            @Model.getTemp(@item.Temperature) C
-        </p>
+                    <p class=" temp">
+                        @Model.getTemp(@item.Temperature) C
+                    </p>
+                </div>
+            </div>
+
+        }
     </div>
-}
-
+</div>
 <div>
     @Html.ActionLink("Search for a new Location", "Index")
 </div>

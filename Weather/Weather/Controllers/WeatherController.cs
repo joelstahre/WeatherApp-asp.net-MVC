@@ -48,6 +48,7 @@ namespace Weather.Controllers {
             return View("Error");
         }
 
+
         public ActionResult GetWeather(Position position) {
 
             string data = String.Empty;

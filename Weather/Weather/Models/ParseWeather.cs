@@ -27,13 +27,14 @@ namespace Weather.Models {
                 var time = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds((double)item["dt"]).ToLocalTime();
                 var temp = (double)item["main"]["temp"];
                 var symbol = (string)item["weather"][0]["icon"];
+                var desc = (string)item["weather"][0]["description"];
 
 
                 if (time.Day == today.Day && counter <= 5) {
 
                     if (time.Hour == 13 || time.Hour == 16 || time.Hour == 19) {
 
-                        weathers.Add(new Weather(time, temp, symbol));
+                        weathers.Add(new Weather(time, temp, symbol, desc));
                         today = today.AddDays(1);
                         counter++;
                     }

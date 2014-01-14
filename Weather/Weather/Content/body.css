@@ -1,0 +1,37 @@
+  body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+
+
+
+  
+
+.temp {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+}
+
+.day {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.row {
+    margin-bottom: 100px;
+}

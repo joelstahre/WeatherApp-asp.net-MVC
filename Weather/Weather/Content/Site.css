@@ -64,6 +64,15 @@ textarea {
 /* Custom Styles
 -----------------------------------------------------------*/
 
+.h2 {
+    margin-bottom: 30px;
+}
+
+.searchForm {
+    width: 200px;
+    margin: 0 auto;
+}
+
 .wrapper {
     width: 1070px;
     margin: 0 auto;
@@ -91,8 +100,9 @@ textarea {
 }
 
 img {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     display: block;
     margin: 0 auto;
 }
+
